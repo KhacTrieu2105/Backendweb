@@ -7,12 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
-    public function run()
+    public function run() 
+    
     {
 
-    $this->call([
-    ProductSeeder::class,
-]);
+   
         DB::table('products')->insert([
             [
                 'category_id' => 1,
