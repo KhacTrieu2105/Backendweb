@@ -9,6 +9,10 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
+
+    $this->call([
+    ProductSeeder::class,
+]);
         DB::table('products')->insert([
             [
                 'category_id' => 1,
