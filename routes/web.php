@@ -9,7 +9,8 @@ Route::get('/', function () {
 
 Route::get('/init-db', function () {
     try {
-        Artisan::call('migrate:fresh --force');
+        // Tách 'migrate:fresh' và mảng tham số ['--force' => true]
+        Artisan::call('migrate:fresh', ['--force' => true]);
         return "Database đã được khởi tạo và tạo bảng thành công!";
     } catch (\Exception $e) {
         return "Lỗi: " . $e->getMessage();
