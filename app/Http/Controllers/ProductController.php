@@ -126,9 +126,11 @@ class ProductController extends Controller
             'description'   => $product->description,
             'content'       => $product->content,
             'status'        => $product->status,
-            'thumbnail_url' => $product->thumbnail
-                ? asset('storage/' . $product->thumbnail) . '?t=' . $product->updated_at->timestamp
-                : null,
+           'thumbnail_url' => $product->thumbnail
+            ? (str_starts_with($product->thumbnail, 'http') 
+                ? $product->thumbnail 
+                : asset('storage/' . $product->thumbnail) . ($product->updated_at ? '?t=' . $product->updated_at->timestamp : ''))
+            : null,
             'formatted_attributes' => $product->productAttributes->map(function ($pa) {
                 return [
                     'attribute_id'   => $pa->attribute_id,
@@ -161,8 +163,10 @@ class ProductController extends Controller
         $product = Product::with(['productAttributes.attribute'])->findOrFail($id);
 
         $product->thumbnail_url = $product->thumbnail
-            ? asset('storage/' . $product->thumbnail) . '?t=' . $product->updated_at->timestamp
-            : null;
+        ? (str_starts_with($product->thumbnail, 'http') 
+            ? $product->thumbnail 
+            : asset('storage/' . $product->thumbnail) . ($product->updated_at ? '?t=' . $product->updated_at->timestamp : ''))
+        : null;
 
         $product->formatted_attributes = $product->productAttributes->map(function ($pa) {
             return [
