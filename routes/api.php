@@ -50,6 +50,13 @@ Route::get('/attributes', [AttributeController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/vnpay-ipn', [OrderController::class, 'vnpayIPN']);
 Route::get('/vnpay-return', [OrderController::class, 'vnpayReturn']);
+    // Product Management
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/products/{id}', [ProductController::class, 'show']);
+    Route::put('/products/{id}', [ProductController::class, 'update']);
+    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+    Route::post('/products/{id}/attributes', [AttributeController::class, 'store']);
 
 // Test route để debug post detail
 
@@ -87,13 +94,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/setting', [SettingController::class, 'index']);
     Route::put('/setting', [SettingController::class, 'update']);
 
-    // Product Management
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::post('/products', [ProductController::class, 'store']);
-    Route::get('/products/{id}', [ProductController::class, 'show']);
-    Route::put('/products/{id}', [ProductController::class, 'update']);
-    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
-    Route::post('/products/{id}/attributes', [AttributeController::class, 'store']);
 
     // Category Management
     Route::get('/category', [CategoryController::class, 'index']);
